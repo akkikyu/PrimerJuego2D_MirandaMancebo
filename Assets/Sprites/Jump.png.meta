@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9423957bff97c644aa7f4c45a9248cbb
+guid: 070e6db4b63bdc948b3cd904805898c9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -97,34 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondos_0
+      name: Jump_0
       rect:
         serializedVersion: 2
-        x: 266
-        y: 1193
-        width: 1533
-        height: 761
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 275, y: 701, z: 249, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d99fc38dc07d1e7498d7a135f55e627e
-      internalID: -1187322681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fondos_1
-      rect:
-        serializedVersion: 2
-        x: 261
-        y: 255
-        width: 1532
-        height: 763
+        x: 385
+        y: 812
+        width: 222
+        height: 312
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +111,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2a0598d82b95434bbea46ffcd302213
-      internalID: -1940301000
+      spriteID: b0bd6100e5e914b449db3fa73be45893
+      internalID: 194768198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_1
+      rect:
+        serializedVersion: 2
+        x: 625
+        y: 788
+        width: 228
+        height: 384
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24a29662ceafbc44c876bc8a965cd570
+      internalID: -47907229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_2
+      rect:
+        serializedVersion: 2
+        x: 883
+        y: 818
+        width: 276
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c1e7bb83f08fd42a7f80f2a6232d46
+      internalID: -824046093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_3
+      rect:
+        serializedVersion: 2
+        x: 1201
+        y: 806
+        width: 222
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acc9a9522a7a6b348ae81c2480b6688d
+      internalID: 2090442272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Jump_4
+      rect:
+        serializedVersion: 2
+        x: 1441
+        y: 824
+        width: 222
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbc99c661ae959a4d933eed8fffb02c0
+      internalID: 255407072
       vertices: []
       indices: 
       edges: []
@@ -149,8 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fondos_0: -1187322681
-      Fondos_1: -1940301000
+      Jump_0: 194768198
+      Jump_1: -47907229
+      Jump_2: -824046093
+      Jump_3: 2090442272
+      Jump_4: 255407072
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

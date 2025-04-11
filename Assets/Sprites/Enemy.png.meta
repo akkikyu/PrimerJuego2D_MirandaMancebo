@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9423957bff97c644aa7f4c45a9248cbb
+guid: 4d195bdeeb9e40940b7a337735a96bd3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 0
+    resizeAlgorithm: 1
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -97,34 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondos_0
+      name: Enemy_0
       rect:
         serializedVersion: 2
-        x: 266
-        y: 1193
-        width: 1533
-        height: 761
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 275, y: 701, z: 249, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d99fc38dc07d1e7498d7a135f55e627e
-      internalID: -1187322681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fondos_1
-      rect:
-        serializedVersion: 2
-        x: 261
-        y: 255
-        width: 1532
-        height: 763
+        x: 452
+        y: 1011
+        width: 378
+        height: 379
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +111,113 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2a0598d82b95434bbea46ffcd302213
-      internalID: -1940301000
+      spriteID: 9322768c07172a6428e04bb2828f8738
+      internalID: 938068575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_1
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 1023
+        width: 378
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e4bfd13a28194042a86ce413b817cbd
+      internalID: 917401850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_2
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 1036
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44a2fc8dfb5cb7941ae4a60f22830b18
+      internalID: 1768892596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_3
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 651
+        width: 378
+        height: 348
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 589adc999805d724b9f9356e0d3748e7
+      internalID: 1530088519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_4
+      rect:
+        serializedVersion: 2
+        x: 833
+        y: 657
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50951dbca21069946ae19ff9884c0395
+      internalID: 1668743741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Enemy_5
+      rect:
+        serializedVersion: 2
+        x: 1217
+        y: 645
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68eb9bf0eec512448a80d89204659312
+      internalID: -1229335512
       vertices: []
       indices: 
       edges: []
@@ -149,8 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fondos_0: -1187322681
-      Fondos_1: -1940301000
+      Enemy_0: 938068575
+      Enemy_1: 917401850
+      Enemy_2: 1768892596
+      Enemy_3: 1530088519
+      Enemy_4: 1668743741
+      Enemy_5: -1229335512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
