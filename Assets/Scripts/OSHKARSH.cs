@@ -20,12 +20,13 @@ public class OSHKARSH : MonoBehaviour
     [Header("Jump")]
     public float jumpForce = 25;
 
-    [Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
+    /*[Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
     [SerializeField] private float _dashForce = 20;
     [SerializeField] private float _dashDuration = 0.5f;
     [SerializeField] private float _dashCoolDown = 1;
     private bool _canDash = true;
     private bool _isDashing = false;
+    */
 
 
     void Awake()
@@ -44,10 +45,11 @@ public class OSHKARSH : MonoBehaviour
             Jump();
         }
 
-        if(_isDashing)
+        /*if(_isDashing)
         {
             return;
         }
+        */
 
     }
 
