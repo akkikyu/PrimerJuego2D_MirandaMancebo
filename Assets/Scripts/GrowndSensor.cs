@@ -4,40 +4,43 @@ using UnityEngine;
 
 public class GrowndSensor : MonoBehaviour
 {
+  [Header("Static Ground")]
+  private Rigidbody2D _rigidBody;
+  
+  [Header("Oshkarsh Jump")] 
+  public bool isGrounded;
+  public float jumpForce = 12;
+
+
+  void Awake()
+  {
+    _rigidBody = GetComponentInParent<Rigidbody2D>();
+  }
     
-    public bool isGrounded;
-    private Rigidbody2D _rigidBody;
-    void Awake()
+  void OnTriggerEnter2D(Collider2D collider)
+  {
+    if(collider.gameObject.layer == 3)
     {
-      _rigidBody = GetComponentInParent<Rigidbody2D>();
+      isGrounded = true;
+      Debug.Log(collider.gameObject.name);
+      Debug.Log(collider.gameObject.transform.position);
     }
-    void OnTriggerEnter2D(Collider2D collider)
-    {
-      if(collider.gameObject.layer == 3)
-      {
-        isGrounded = true;
-        Debug.Log(collider.gameObject.name);
-        Debug.Log(collider.gameObject.transform.position);
-      }
-      else if (collider.gameObject.layer == 6)
-      {
-        _rigidBody.AddForce(Vector2.up * 10, ForceMode2D.Impulse);
-      }
-    }
+  }
 
-    void OnTriggerStay2D(Collider2D collider)
+  void OnTriggerStay2D(Collider2D collider)
+  {
+    if(collider.gameObject.layer == 3)
     {
-      if(collider.gameObject.layer == 3)
-      {
-        isGrounded = true;
-      }
+      isGrounded = true;
     }
+  }
 
-    void OnTriggerExit2D(Collider2D collider)
+  void OnTriggerExit2D(Collider2D collider)
+  {
+    if(collider.gameObject.layer == 3)
     {
-      if(collider.gameObject.layer == 3)
-      {
-        isGrounded = false;
-      }
+      isGrounded = false;
     }
+  }
+
 }

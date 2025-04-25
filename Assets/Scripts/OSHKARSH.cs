@@ -4,13 +4,22 @@ using UnityEngine;
 
 public class OSHKARSH : MonoBehaviour
 {
-    public float playerSpeed = 4.5f;
-    public int direction = 1;
+    [Header("Physics, RigidBody, GroundSensor, BoxCollider")]
     public Rigidbody2D rigidBody;
-    private float inputHorizontal;
     private SpriteRenderer _spriteRenderer;
     public GrowndSensor _groundSensor;
     private BoxCollider2D _boxCollider;
+
+    [Header("Key")]
+    [SerializeField]private float inputHorizontal;
+
+    [Header("Run")]
+    public float playerSpeed = 5;
+    public int direction = 1;
+
+    [Header("Jump")]
+    public float jumpForce = 25;
+
 
     void Awake()
     {
@@ -22,6 +31,16 @@ public class OSHKARSH : MonoBehaviour
     void Update()
     {
         inputHorizontal = Input.GetAxisRaw("Horizontal");
+
+        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
+        {
+            Jump();
+        }
+    }
+
+    void FixedUpdate()
+    {
+        rigidBody.velocity = new  Vector2(inputHorizontal * playerSpeed, rigidBody.velocity.y);
     }
 
     void Movement()
@@ -44,5 +63,9 @@ public class OSHKARSH : MonoBehaviour
         */
     }
 
+    void Jump()
+    {
+        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+    }
 
 }
