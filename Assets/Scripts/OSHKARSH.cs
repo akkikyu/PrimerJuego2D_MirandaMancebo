@@ -5,29 +5,33 @@ using UnityEngine;
 public class OSHKARSH : MonoBehaviour
 {
     [Header("Physics, RigidBody, GroundSensor, BoxCollider")]
-    [SerializeField]private Rigidbody2D _rigidBody;
+    [SerializeField] private Rigidbody2D _rigidBody;
     private SpriteRenderer _spriteRenderer;
     public GrowndSensor _groundSensor;
     private BoxCollider2D _boxCollider;
-    private bool _alreadyPlaying;
+    private bool _alreadyPlaying = false;
 
     [Header("Animator")]
-    [SerializeField]private Animator _animator;
+    [SerializeField] private Animator _animator;
 
     [Header("Key")]
-    [SerializeField]private float inputHorizontal;
+    [SerializeField] private float inputHorizontal;
 
     [Header("Run")]
     public float playerSpeed = 5;
     public int direction = 1;
-    private AudioSource _runSound;
+    [SerializeField] private AudioSource _runSound;
     public AudioClip runFX;
-
 
     [Header("Jump")]
     public float jumpForce = 8;
     private AudioSource _jumpSound;
     public AudioClip jumpFX;
+
+    [Header("Particle System")]
+    [SerializeField] private ParticleSystem _particleSystem;
+    private Transform _particleTransform;
+    private Vector3 _particlePosition;
 
     /*[Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
     [SerializeField] private float _dashForce = 20;
@@ -42,22 +46,25 @@ public class OSHKARSH : MonoBehaviour
     {
         _rigidBody = GetComponent<Rigidbody2D>();
         _groundSensor = GetComponentInChildren<GrowndSensor>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _animator = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
         _jumpSound = GetComponent<AudioSource>();
-        _jumpSound.Clip = jumpFX;
+        _jumpSound.clip = jumpFX;
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
+        _particleTransform = _particleSystem.transform;
+        _particlePosition = _particleTransform.localPosition;
 
     }
 
     void Start()
     {
         _runSound.loop = true;
-        _runSound = runFX;
+        _runSound.clip = runFX;
     }
     
     void Update()
     {
         Jump();
+        PlayerStepsSounds();
     }
 
     void FixedUpdate()
@@ -97,19 +104,25 @@ public class OSHKARSH : MonoBehaviour
             _animator.SetBool("IsJumping", true);
             _jumpSound.PlayOneShot(jumpFX);
         }
-        _animator.SetBool("IsJumping", !groundSensor.isGrounded);
+        _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
     }
 
-    void PlayerStepSounds()
+    void PlayerStepsSounds()
     {
-        if(groundSensor.isGrounded && true Input.GetAxisRaw("Horizontal") != 0 && !_alreadyPlaying)
+        if(_groundSensor.isGrounded && Input.GetAxisRaw("Horizontal") != 0 && !_alreadyPlaying)
         {
+            _particleTransform.SetParent(gameObject.transform);
+            _particleTransform.localPosition = _particlePosition;
+            _particleTransform.rotation = transform.rotation;
             _runSound.Play();
+            _particleSystem.Play();
             _alreadyPlaying = true;
         }
-        else if(!groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
+        else if(!_groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
         {
+            _particleTransform.SetParent(null); //cuando salte dejará de ser hijo nadie y se quitará
             _runSound.Stop();
+            _particleSystem.Stop();
             _alreadyPlaying = false;
         }
     }
