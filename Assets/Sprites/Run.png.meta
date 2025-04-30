@@ -121,9 +121,9 @@ TextureImporter:
       name: Run_1
       rect:
         serializedVersion: 2
-        x: 546
+        x: 542
         y: 1033
-        width: 308
+        width: 312
         height: 336
       alignment: 9
       pivot: {x: 0.59999996, y: 1}
@@ -142,9 +142,9 @@ TextureImporter:
       name: Run_2
       rect:
         serializedVersion: 2
-        x: 860
+        x: 854
         y: 1033
-        width: 240
+        width: 246
         height: 336
       alignment: 9
       pivot: {x: 0.67, y: 1}

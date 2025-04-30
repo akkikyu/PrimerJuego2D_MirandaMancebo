@@ -5,7 +5,7 @@ using UnityEngine;
 public class GrowndSensor : MonoBehaviour
 {
   [Header("Static Ground")]
-  private Rigidbody2D _rigidBody;
+  private Rigidbody2D _rigidBodyGSensor;
   
   [Header("Oshkarsh Jump")] 
   public bool isGrounded;
@@ -14,7 +14,7 @@ public class GrowndSensor : MonoBehaviour
 
   void Awake()
   {
-    _rigidBody = GetComponentInParent<Rigidbody2D>();
+    _rigidBodyGSensor = GetComponentInParent<Rigidbody2D>();
   }
     
   void OnTriggerEnter2D(Collider2D collider)
@@ -22,8 +22,6 @@ public class GrowndSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
-      Debug.Log(collider.gameObject.name);
-      Debug.Log(collider.gameObject.transform.position);
     }
   }
 

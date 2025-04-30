@@ -5,10 +5,14 @@ using UnityEngine;
 public class OSHKARSH : MonoBehaviour
 {
     [Header("Physics, RigidBody, GroundSensor, BoxCollider")]
-    public Rigidbody2D rigidBody;
+    [SerializeField]private Rigidbody2D _rigidBody;
     private SpriteRenderer _spriteRenderer;
     public GrowndSensor _groundSensor;
     private BoxCollider2D _boxCollider;
+    private bool _alreadyPlaying;
+
+    [Header("Animator")]
+    [SerializeField]private Animator _animator;
 
     [Header("Key")]
     [SerializeField]private float inputHorizontal;
@@ -16,9 +20,14 @@ public class OSHKARSH : MonoBehaviour
     [Header("Run")]
     public float playerSpeed = 5;
     public int direction = 1;
+    private AudioSource _runSound;
+    public AudioClip runFX;
+
 
     [Header("Jump")]
-    public float jumpForce = 25;
+    public float jumpForce = 8;
+    private AudioSource _jumpSound;
+    public AudioClip jumpFX;
 
     /*[Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
     [SerializeField] private float _dashForce = 20;
@@ -31,56 +40,78 @@ public class OSHKARSH : MonoBehaviour
 
     void Awake()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
         _groundSensor = GetComponentInChildren<GrowndSensor>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Rigidbody2D>();
+        _jumpSound = GetComponent<AudioSource>();
+        _jumpSound.Clip = jumpFX;
+
+    }
+
+    void Start()
+    {
+        _runSound.loop = true;
+        _runSound = runFX;
     }
     
     void Update()
     {
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
-
-        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
-        {
-            Jump();
-        }
-
-        /*if(_isDashing)
-        {
-            return;
-        }
-        */
-
+        Jump();
     }
 
     void FixedUpdate()
     {
-        rigidBody.velocity = new  Vector2(inputHorizontal * playerSpeed, rigidBody.velocity.y);
+        Movement(); 
     }
 
     void Movement()
     {
+        _rigidBody.velocity = new  Vector2(Input.GetAxisRaw("Horizontal") * playerSpeed, _rigidBody.velocity.y);
+
         if(inputHorizontal > 0)
         {
            transform.rotation = Quaternion.Euler(0, 0, 0);
-            //_animator.SetBool("IsRunning", true); 
+           _animator.SetBool("IsRunning", true); 
         }
 
       else if(inputHorizontal < 0)
         {
             transform.rotation = Quaternion.Euler(0, 180, 0);
-            //_animator.SetBool("IsRunning", true);       
+            _animator.SetBool("IsRunning", true);       
         }
-      /*else
+      else
         {
             _animator.SetBool("IsRunning", false);
         }
-        */
+
+        inputHorizontal = Input.GetAxisRaw("Horizontal");
     }
 
     void Jump()
     {
-        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
+        {
+            _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            _animator.SetBool("IsRunning", false);
+            _animator.SetBool("IsJumping", true);
+            _jumpSound.PlayOneShot(jumpFX);
+        }
+        _animator.SetBool("IsJumping", !groundSensor.isGrounded);
+    }
+
+    void PlayerStepSounds()
+    {
+        if(groundSensor.isGrounded && true Input.GetAxisRaw("Horizontal") != 0 && !_alreadyPlaying)
+        {
+            _runSound.Play();
+            _alreadyPlaying = true;
+        }
+        else if(!groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
+        {
+            _runSound.Stop();
+            _alreadyPlaying = false;
+        }
     }
 
 }
