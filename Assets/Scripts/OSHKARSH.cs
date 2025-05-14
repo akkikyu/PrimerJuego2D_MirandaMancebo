@@ -63,8 +63,14 @@ public class OSHKARSH : MonoBehaviour
     
     void Update()
     {
-        Jump();
-        PlayerStepsSounds();
+        if(Input.GetButtonDown("Jump"))
+        {
+            if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
+            {
+                Jump();
+            }
+        }
+        _animator.SetBool("IsJumping", !_groundSensor.isGrounded);  
     }
 
     void FixedUpdate()
@@ -97,14 +103,13 @@ public class OSHKARSH : MonoBehaviour
 
     void Jump()
     {
-        if(Input.GetButtonDown("Jump") && _groundSensor.isGrounded == true)
+        if(!_groundSensor.isGrounded)
         {
-            _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            _animator.SetBool("IsRunning", false);
-            _animator.SetBool("IsJumping", true);
-            _jumpSound.PlayOneShot(jumpFX);
+            _groundSensor.canDoubleJump = false;
+            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
         }
-        _animator.SetBool("IsJumping", !_groundSensor.isGrounded);
+    
+        _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);      
     }
 
     void PlayerStepsSounds()

@@ -7,9 +7,12 @@ public class GrowndSensor : MonoBehaviour
   [Header("Static Ground")]
   private Rigidbody2D _rigidBodyGSensor;
   
-  [Header("Oshkarsh Jump")] 
+  [Header("Oskar Jump")] 
   public bool isGrounded;
   public float jumpForce = 12;
+
+  [Header("Double Jump")]
+  public bool canDoubleJump = true;
 
 
   void Awake()
@@ -22,6 +25,7 @@ public class GrowndSensor : MonoBehaviour
     if(collider.gameObject.layer == 3)
     {
       isGrounded = true;
+      canDoubleJump = true;
     }
   }
 
