@@ -921,6 +921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: 0
   jumpForce: 5
+  canDoubleJump: 1
 --- !u!1 &229743701
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,7 +4138,7 @@ MonoBehaviour:
   direction: 1
   _runSound: {fileID: 1769856882}
   runFX: {fileID: 8300000, guid: 87a0da1e40d33a141a2445f5eeea0c45, type: 3}
-  jumpForce: 8
+  jumpForce: 6
   jumpFX: {fileID: 8300000, guid: b081ff5af302c2049b7113743ffbe306, type: 3}
   _particleSystem: {fileID: 0}
 --- !u!50 &1769856878
