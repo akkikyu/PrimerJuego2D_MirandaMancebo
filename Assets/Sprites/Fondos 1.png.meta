@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9423957bff97c644aa7f4c45a9248cbb
+guid: 883c3e188c34adb498ac7873dd0561e2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,34 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondos_0
+      name: Fondos 1_0
       rect:
         serializedVersion: 2
-        x: 266
-        y: 1193
-        width: 1533
-        height: 761
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 275, y: 701, z: 249, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d99fc38dc07d1e7498d7a135f55e627e
-      internalID: -1187322681
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fondos_1
-      rect:
-        serializedVersion: 2
-        x: 261
-        y: 255
-        width: 1532
-        height: 763
+        x: 1560
+        y: 1987
+        width: 24
+        height: 5
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,8 +111,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2a0598d82b95434bbea46ffcd302213
-      internalID: -1940301000
+      spriteID: 392c7ff1250fa7d49a4e9c319dbb182e
+      internalID: -1086771087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondos 1_1
+      rect:
+        serializedVersion: 2
+        x: 1624
+        y: 1987
+        width: 32
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 560e2733d46ba514cb5fe211f10f3728
+      internalID: 2096399711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondos 1_2
+      rect:
+        serializedVersion: 2
+        x: 1688
+        y: 1987
+        width: 16
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a004b6ae53333af498c1cf7932401118
+      internalID: 424157561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondos 1_3
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 1192
+        width: 1537
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db199e6477b89d146be66ae424624576
+      internalID: -682866462
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Fondos 1_4
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 252
+        width: 1536
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dc6418868411154f89cdb0cc74ed300
+      internalID: -1839625356
       vertices: []
       indices: 
       edges: []
@@ -149,8 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fondos_0: -1187322681
-      Fondos_1: -1940301000
+      Fondos 1_0: -1086771087
+      Fondos 1_1: 2096399711
+      Fondos 1_2: 424157561
+      Fondos 1_3: -682866462
+      Fondos 1_4: -1839625356
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
