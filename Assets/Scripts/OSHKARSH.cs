@@ -33,6 +33,9 @@ public class OSHKARSH : MonoBehaviour
     private Transform _particleTransform;
     private Vector3 _particlePosition;
 
+    //[Header("Normal Attack")]
+
+
     /*[Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
     [SerializeField] private float _dashForce = 20;
     [SerializeField] private float _dashDuration = 0.5f;
