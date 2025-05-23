@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class StartManager : MonoBehaviour
 {
-    /*public void Play()
+    public void Play()
     {
-        SceneManagement.LoadScene(1); 
+        SceneManager.LoadScene(1); 
     }
 
     public void Exit()
     {
         Application.Quit();
-    }*/
+    }
 }

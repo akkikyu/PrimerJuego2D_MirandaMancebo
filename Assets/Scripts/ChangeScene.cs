@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ChangeScene : MonoBehaviour
 {
-    public void CambiarEcena
+    /*public void CambiarEcena
     {
-        boton.SetActive(true);
-    }
+        button.SetActive(true);
+    }*/
 }

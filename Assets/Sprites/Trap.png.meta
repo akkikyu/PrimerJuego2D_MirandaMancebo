@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 883c3e188c34adb498ac7873dd0561e2
+guid: 90259f8ff5585a346b2b951c8cbd0595
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,110 +93,123 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fondos 1_0
+      name: Trap_0
       rect:
         serializedVersion: 2
-        x: 1560
-        y: 1987
-        width: 24
-        height: 5
+        x: 547
+        y: 1350
+        width: 8
+        height: 9
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 392c7ff1250fa7d49a4e9c319dbb182e
-      internalID: -1086771087
+      spriteID: d7f98b4e47a25dc4a90b485f964fb079
+      internalID: 705942878
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos 1_1
+      name: Trap_27
       rect:
         serializedVersion: 2
-        x: 1624
-        y: 1987
-        width: 32
-        height: 5
+        x: 358
+        y: 1165
+        width: 600
+        height: 315
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 560e2733d46ba514cb5fe211f10f3728
-      internalID: 2096399711
+      spriteID: aecf65c0a5af23044b7f8ee404430889
+      internalID: 1957861308
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos 1_2
+      name: Trap_28
       rect:
         serializedVersion: 2
-        x: 1688
-        y: 1987
-        width: 16
-        height: 5
+        x: 1090
+        y: 1165
+        width: 600
+        height: 395
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a004b6ae53333af498c1cf7932401118
-      internalID: 424157561
+      spriteID: fb304cc7b8069854eb510f9b2222ef8e
+      internalID: -1129949300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos 1_3
+      name: Trap_29
       rect:
         serializedVersion: 2
-        x: 263
-        y: 1192
-        width: 1537
-        height: 765
+        x: 358
+        y: 690
+        width: 600
+        height: 367
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db199e6477b89d146be66ae424624576
-      internalID: -682866462
+      spriteID: f0bdff9ea0da9ec41a64b52338fdd24f
+      internalID: 1370283015
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fondos 1_4
+      name: Trap_30
       rect:
         serializedVersion: 2
-        x: 261
-        y: 252
-        width: 1536
-        height: 768
+        x: 1090
+        y: 690
+        width: 600
+        height: 376
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9dc6418868411154f89cdb0cc74ed300
-      internalID: -1839625356
+      spriteID: 54fff620a23c24a47ac966653a53244a
+      internalID: -322686261
       vertices: []
       indices: 
       edges: []
@@ -212,11 +225,37 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Fondos 1_0: -1086771087
-      Fondos 1_1: 2096399711
-      Fondos 1_2: 424157561
-      Fondos 1_3: -682866462
-      Fondos 1_4: -1839625356
+      Trap_0: 705942878
+      Trap_1: 1512407694
+      Trap_10: -1519604274
+      Trap_11: -1431201684
+      Trap_12: 226229115
+      Trap_13: 723179943
+      Trap_14: -1561521150
+      Trap_15: -710244043
+      Trap_16: 79981998
+      Trap_17: -239276667
+      Trap_18: -152658303
+      Trap_19: 1540505387
+      Trap_2: -1043429954
+      Trap_20: -1610222255
+      Trap_21: 2049966258
+      Trap_22: 1260421123
+      Trap_23: 725650834
+      Trap_24: -302660021
+      Trap_25: 1502956915
+      Trap_26: -118172374
+      Trap_27: 1957861308
+      Trap_28: -1129949300
+      Trap_29: 1370283015
+      Trap_3: -1025980533
+      Trap_30: -322686261
+      Trap_4: -1617433032
+      Trap_5: -1649863322
+      Trap_6: 1452251029
+      Trap_7: -1500174752
+      Trap_8: 271530255
+      Trap_9: -881918490
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
