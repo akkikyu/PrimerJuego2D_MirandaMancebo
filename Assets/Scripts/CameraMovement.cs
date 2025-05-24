@@ -20,9 +20,14 @@ public class CameraMovement : MonoBehaviour
     public float interpolationRatio = 0.5f;
     [Tooltip("Delay que hay entre el personaje y la cámara")]
 
+    private AudioSource audioSource;
+    public AudioClip BGM;
+
     void Awake()
     {
         playerTransform = GameObject.FindWithTag("Player").transform; //para que la cámara sepa a quién perseguir
+        audioSource = GetComponent<AudioSource>();
+        BGM = GetComponent<AudioClip>();
     }
 
     void FixedUpdate()

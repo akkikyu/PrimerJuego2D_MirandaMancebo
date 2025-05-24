@@ -1,138 +1,405 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OSHKARSH : MonoBehaviour
 {
-    [Header("Physics, RigidBody, GroundSensor, BoxCollider")]
-    [SerializeField] private Rigidbody2D _rigidBody;
-    private SpriteRenderer _spriteRenderer;
-    public GrowndSensor _groundSensor;
-    private BoxCollider2D _boxCollider;
-    private bool _alreadyPlaying = false;
+    [Header("Movement")]
+    public float moveSpeed = 8f;
+    public float jumpForce = 12f;
 
-    [Header("Animator")]
-    [SerializeField] private Animator _animator;
+    [Header("Variable Jump")]
+    public float jumpTime = 0.25f;
+    public float jumpForceMultiplier = 1f;
+    private float jumpTimeCounter;
+    private bool isJumping;
 
-    [Header("Key")]
-    [SerializeField] private float inputHorizontal;
+    [Header("Doble Salto")]
+    public int maxJumps = 2;
+    private int jumpCount;
 
-    [Header("Run")]
-    public float playerSpeed = 5;
-    public int direction = 1;
-    [SerializeField] private AudioSource _runSound;
-    public AudioClip runFX;
+    [Header("Wall Jump")]
+    public float wallJumpForce = 14f;
+    public Vector2 wallJumpDirection = new Vector2(1, 1);
+    public float wallJumpDuration = 0.2f;
 
-    [Header("Jump")]
-    public float jumpForce = 8;
-    private AudioSource _jumpSound;
-    public AudioClip jumpFX;
+    [Header("Wall Slide")]
+    public float wallSlideSpeed = 2f;
+    public Vector2 wallCheckOffset = new Vector2(0.5f, 0f);
+    public float wallCheckRadius = 0.2f;
+    public LayerMask wallLayer;
 
-    [Header("Particle System")]
-    [SerializeField] private ParticleSystem _particleSystem;
-    private Transform _particleTransform;
-    private Vector3 _particlePosition;
+    [Header("Ground Check")]
+    public Transform groundCheck;
+    public float groundCheckRadius = 0.2f;
+    public LayerMask groundLayer;
 
-    //[Header("Normal Attack")]
+    [Header("Dash")]
+    public float dashSpeed = 20f;
+    public float dashDuration = 0.2f;
+    public float dashCooldown = 1f;
+    private float lastDashTime = -Mathf.Infinity;
+    public ParticleSystem dashParticles;
 
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
 
-    /*[Header("Dash")] //cambiar a nombre Oshkar y terminar de poner el dash
-    [SerializeField] private float _dashForce = 20;
-    [SerializeField] private float _dashDuration = 0.5f;
-    [SerializeField] private float _dashCoolDown = 1;
-    private bool _canDash = true;
-    private bool _isDashing = false;
-    */
+    private bool isGrounded;
+    private bool isTouchingWall;
+    private bool isWallSliding;
+    private bool isWallJumping;
+    private bool isDashing;
 
+    private float wallJumpTime;
+    private float moveInput;
+    private int facingDirection = 1;
+    private Animator animator;
 
-    void Awake()
-    {
-        _rigidBody = GetComponent<Rigidbody2D>();
-        _groundSensor = GetComponentInChildren<GrowndSensor>();
-        _animator = GetComponent<Animator>();
-        _jumpSound = GetComponent<AudioSource>();
-        _jumpSound.clip = jumpFX;
-        _particleSystem = GetComponentInChildren<ParticleSystem>();
-        _particleTransform = _particleSystem.transform;
-        _particlePosition = _particleTransform.localPosition;
+    [Header("Attack")]
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public int attackDamage = 1;
+    public LayerMask enemyLayers;
+    public float attackRate = 2f;
+    private float nextAttackTime = 0f;
+    private bool isFacingRight = true;
 
-    }
+    [Header("Damaeg & Invulnerability")]
+    public float knockbackForce = 10f;
+    public float knockbackDuration = 0.2f;
+    public AudioClip hurtSound;
+    public float invulnerabilidadDuracion = 1f;
+    private bool isKnockedBack = false;
+    private bool isInvulnerable = false;
+
+    [Header("Potatos")]
+    public int cantidadPatatas = 0; // Cantidad actual de patatas
+    public GameObject prefabPatata; // Prefab de la patata para lanzar
+    public Transform puntoLanzamiento; // Punto desde donde se lanza la patata
+    public float fuerzaLanzamiento = 10f;
+    public Text patatasCountText;
+
+    [Header("Sounds")]
+    public AudioSource audioSource;
+    public AudioSource footstepSource;
+    public AudioClip footstepClip;
+    private bool footstepClipPlaying = false;
+    public AudioClip jumpSound;
+    public AudioClip dashSound;
+    public AudioClip attackSound;
+
 
     void Start()
     {
-        _runSound.loop = true;
-        _runSound.clip = runFX;
+        rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        wallJumpDirection.Normalize();
+        animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        UpdatePatatasUI();
+
     }
-    
+
     void Update()
     {
-        if(Input.GetButtonDown("Jump"))
+        moveInput = Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+        // Flip del personaje y attackPoint
+        if (moveInput != 0 && !isWallJumping)
         {
-            if(_groundSensor.isGrounded || _groundSensor.canDoubleJump)
+            if ((moveInput > 0 && !isFacingRight) || (moveInput < 0 && isFacingRight))
             {
-                Jump();
+                Flip();
             }
         }
-        _animator.SetBool("IsJumping", !_groundSensor.isGrounded);  
+
+        // Sonido pasos
+        if (isGrounded && moveInput != 0 && !footstepClipPlaying)
+        {
+            footstepClipPlaying = true;
+            footstepSource.clip = footstepClip;
+            footstepSource.Play();
+        }
+        else if ((!isGrounded || moveInput == 0) && footstepClipPlaying)
+        {
+            footstepClipPlaying = false;
+            footstepSource.Stop();
+        }
+
+        // Ataque
+        if (Time.time >= nextAttackTime)
+        {
+            if (Input.GetMouseButtonDown(0)) // Click izquierdo
+            {
+                AttackAnimator();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+        if (Input.GetMouseButtonDown(1)) // Botón derecho del ratón
+        {
+            LanzarPatata();
+        }
+
+
+        // Chequeos de suelo y pared
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        Vector2 wallCheckPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
+        isTouchingWall = Physics2D.OverlapCircle(wallCheckPos, wallCheckRadius, wallLayer);
+
+        if (isGrounded)
+        {
+            jumpCount = maxJumps;
+        }
+
+        isWallSliding = isTouchingWall && !isGrounded && moveInput != 0 && !isWallJumping && !isDashing;
+
+        if (isWallSliding)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlideSpeed, float.MaxValue));
+        }
+
+        // Saltos
+        if (Input.GetButtonDown("Jump"))
+        {
+            animator.SetBool("isJumping", true);
+            if (isGrounded || (jumpCount > 0 && !isWallSliding))
+            {
+                isJumping = true;
+                jumpTimeCounter = jumpTime;
+                audioSource.PlayOneShot(jumpSound);
+
+                rb.velocity = new Vector2(rb.velocity.x, 0f);
+                rb.velocity += Vector2.up * jumpForce;
+
+                jumpCount--;
+            }
+            else if (isWallSliding)
+            {
+                isWallJumping = true;
+                wallJumpTime = Time.time + wallJumpDuration;
+
+                rb.velocity = new Vector2(-facingDirection * wallJumpForce * wallJumpDirection.x,
+                                           wallJumpForce * wallJumpDirection.y);
+
+                // Ya no uses spriteRenderer.flipX aquí
+                // spriteRenderer.flipX = facingDirection > 0;
+                jumpCount = maxJumps;
+            }
+        }
+
+        if (Input.GetButton("Jump") && isJumping && !isDashing)
+        {
+            if (jumpTimeCounter > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce * jumpForceMultiplier);
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
+        if (Input.GetButtonUp("Jump"))
+        {
+            isJumping = false;
+            animator.SetTrigger("Jump");    // Al iniciar salto
+        }
+
+        if (Time.time > wallJumpTime)
+        {
+            isWallJumping = false;
+        }
+
+        // Dash
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDashing && Time.time >= lastDashTime + dashCooldown)
+        {
+            StartCoroutine(PerformDash());
+            audioSource.PlayOneShot(dashSound);
+        }
+
+        animator.SetFloat("Speed", Mathf.Abs(moveInput));
+
+        // Animaciones booleanas
+        animator.SetBool("isJumping", !isGrounded && !isWallSliding);
+        animator.SetBool("isWallSliding", isWallSliding);
+        animator.SetBool("isDashing", isDashing);
     }
 
     void FixedUpdate()
     {
-        Movement(); 
+        if (isKnockedBack) return;
+
+        if (!isWallJumping && !isWallSliding && !isDashing)
+        {
+            rb.velocity = new Vector2(moveInput * moveSpeed, rb.velocity.y);
+        }
     }
 
-    void Movement()
+    private IEnumerator PerformDash()
     {
-        _rigidBody.velocity = new  Vector2(Input.GetAxisRaw("Horizontal") * playerSpeed, _rigidBody.velocity.y);
+        isDashing = true;
+        lastDashTime = Time.time;
+        animator.SetTrigger("Dashing");
 
-        if(inputHorizontal > 0)
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+
+        // Partículas
+        if (dashParticles != null)
         {
-           transform.rotation = Quaternion.Euler(0, 0, 0);
-           _animator.SetBool("IsRunning", true); 
+            float offsetX = -facingDirection * 0.5f;
+            Vector3 particlePos = transform.position + new Vector3(offsetX, 0f, 0f);
+            dashParticles.transform.position = particlePos;
+
+            float rotationZ = facingDirection == 1 ? 180f : 0f;
+            dashParticles.transform.rotation = Quaternion.Euler(0f, 0f, rotationZ);
+
+            dashParticles.Play();
         }
 
-      else if(inputHorizontal < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-            _animator.SetBool("IsRunning", true);       
-        }
-      else
-        {
-            _animator.SetBool("IsRunning", false);
-        }
+        rb.velocity = new Vector2(facingDirection * dashSpeed, 0f);
 
-        inputHorizontal = Input.GetAxisRaw("Horizontal");
+        yield return new WaitForSeconds(dashDuration);
+
+        rb.gravityScale = originalGravity;
+        isDashing = false;
     }
 
-    void Jump()
+    void OnDrawGizmosSelected()
     {
-        if(!_groundSensor.isGrounded)
+        if (groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+
+        Vector2 gizmoPos = Vector2.zero;
+
+        // Usa la posición mundial del attackPoint para el gizmo
+        if (attackPoint != null)
         {
-            _groundSensor.canDoubleJump = false;
-            _rigidBody.velocity = new Vector2(_rigidBody.velocity.x, 0);
+            gizmoPos = attackPoint.position;
         }
+        else
+        {
+            // Como fallback, usa la posición del personaje + offset
+            gizmoPos = (Vector2)transform.position + new Vector2(facingDirection * wallCheckOffset.x, wallCheckOffset.y);
+        }
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(gizmoPos, attackRange);
+    }
+
+    void Attack()
+    {
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            Phetonisio enemyScript = enemy.GetComponent<Phetonisio>();
+            if (enemyScript != null)
+            {
+                enemyScript.TakeDamage(attackDamage);
+
+            }
+        }
+    }
+
+    void AttackAnimator()
+    {
+         if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+            audioSource.PlayOneShot(attackSound);
+        }
+    }
+
+    void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        facingDirection = isFacingRight ? 1 : -1;
+
+        // Solo invierte la escala X del transform para girar el personaje
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
+
+    }
+
+    public void TakeDamage(int damage, Transform source)
+    {
+        if (isInvulnerable) return;
+
+        // Reproducir sonido de daño
+        audioSource.PlayOneShot(hurtSound);
+
+        // Calcular dirección de retroceso
+        Vector2 knockbackDir = (transform.position - source.position).normalized;
+        StartCoroutine(ApplyKnockback(knockbackDir));
+        StartCoroutine(Invulnerabilidad());
+    }
+
+    private IEnumerator ApplyKnockback(Vector2 direction)
+    {
+        isKnockedBack = true;
+        float timer = 0f;
+
+        while (timer < knockbackDuration)
+        {
+            rb.velocity = new Vector2(direction.x * knockbackForce, direction.y * knockbackForce * 0.5f);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        isKnockedBack = false;
+    }
+
+    private IEnumerator Invulnerabilidad()
+    {
+        isInvulnerable = true;
+        float tiempo = 0f;
+        float intervalo = 0.1f;
+
+        while (tiempo < invulnerabilidadDuracion)
+        {
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+            yield return new WaitForSeconds(intervalo);
+            tiempo += intervalo;
+        }
+
+        spriteRenderer.enabled = true; // Asegura que quede visible
+        isInvulnerable = false;
+    }
+
+    public void recogerPatata()
+    {
+        cantidadPatatas++;
+        ActualizarUI();
+    }
+    public void LanzarPatata()
+    {
+        if (cantidadPatatas > 0)
+        {
+            GameObject patata = Instantiate(prefabPatata, puntoLanzamiento.position, Quaternion.identity);
+            Rigidbody2D rb = patata.GetComponent<Rigidbody2D>();
+            float direccion = transform.localScale.x; // para que lance hacia la dirección que mira el personaje
+            rb.velocity = new Vector2(10f * direccion, 0); // velocidad horizontal
+
+            cantidadPatatas--; // ↓↓↓↓↓ Asegúrate de tener esta línea
+            ActualizarUI();    // y esta para que el número se actualice en el HUD
+        }
+    }
     
-        _rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);      
-    }
-
-    void PlayerStepsSounds()
+    void UpdatePatatasUI()
     {
-        if(_groundSensor.isGrounded && Input.GetAxisRaw("Horizontal") != 0 && !_alreadyPlaying)
+        if (patatasCountText != null)
+            patatasCountText.text = "Patatas: " + cantidadPatatas.ToString();
+    }
+    void ActualizarUI()
+    {
+        if (patatasCountText != null)
         {
-            _particleTransform.SetParent(gameObject.transform);
-            _particleTransform.localPosition = _particlePosition;
-            _particleTransform.rotation = transform.rotation;
-            _runSound.Play();
-            _particleSystem.Play();
-            _alreadyPlaying = true;
-        }
-        else if(!_groundSensor.isGrounded || Input.GetAxisRaw("Horizontal") == 0)
-        {
-            _particleTransform.SetParent(null); //cuando salte dejará de ser hijo nadie y se quitará
-            _runSound.Stop();
-            _particleSystem.Stop();
-            _alreadyPlaying = false;
+            patatasCountText.text = "x " + cantidadPatatas.ToString();
         }
     }
-
 }

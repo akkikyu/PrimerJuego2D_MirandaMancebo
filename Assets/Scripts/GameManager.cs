@@ -1,15 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
 {
-
-     public void MainMenu()
-    {
-        SceneManager.LoadScene(0);
-        Time.timeScale = 1;
-    }
+    public bool IsPlaying = true;
+    public bool isPaused = false;
 }
