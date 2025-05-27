@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6894dcbb3e0ea294eb1c5308f15ee58e
+guid: 7c26dfe97b8fa5b4fab846ef7021f6b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 256
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -93,144 +93,131 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Throw_0
+      name: Phetonisio_0
       rect:
         serializedVersion: 2
-        x: 239
-        y: 849
-        width: 204
+        x: 452
+        y: 1011
+        width: 378
+        height: 393
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf0858df95050e74884f9e7476fb36e8
+      internalID: -1812015838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio_1
+      rect:
+        serializedVersion: 2
+        x: 836
+        y: 1023
+        width: 378
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbdf169cd1fd65e4f857ffcbec17e9f4
+      internalID: 28973387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio_2
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 1036
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b5b25e557013ce479182cd27a7db26b
+      internalID: -1985766340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Phetonisio_3
+      rect:
+        serializedVersion: 2
+        x: 449
+        y: 651
+        width: 378
         height: 348
-      alignment: 9
-      pivot: {x: 0.7072966, y: 0.8540804}
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2621e065c0f6c4e4fba97d1820569f8c
-      internalID: 227231055
+      spriteID: 67c711129912ba845afca7aaafecaa18
+      internalID: 2081557884
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Throw_1
+      name: Phetonisio_4
       rect:
         serializedVersion: 2
-        x: 505
-        y: 849
-        width: 204
-        height: 348
-      alignment: 9
-      pivot: {x: 0.7072966, y: 0.8687467}
+        x: 833
+        y: 657
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f9b043de936732149ac9f0321fce84d0
-      internalID: -894236674
+      spriteID: 28ec4b772d3b32844a9be40d3d5d86d4
+      internalID: 81217871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Throw_2
+      name: Phetonisio_5
       rect:
         serializedVersion: 2
-        x: 787
-        y: 853
-        width: 276
-        height: 348
-      alignment: 9
-      pivot: {x: 0.5436249, y: 0.8748211}
+        x: 1217
+        y: 645
+        width: 378
+        height: 354
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34f4580b355a1c44fb7508fe7780234e
-      internalID: 590729512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Throw_3
-      rect:
-        serializedVersion: 2
-        x: 1098
-        y: 844
-        width: 228
-        height: 360
-      alignment: 9
-      pivot: {x: 0.7435078, y: 0.7917199}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b514c5215378a0746bb6a0c8cdca5ba3
-      internalID: 555839064
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Throw_4
-      rect:
-        serializedVersion: 2
-        x: 1356
-        y: 870
-        width: 210
-        height: 330
-      alignment: 9
-      pivot: {x: 0.713415, y: 0.7756729}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c4c364f834866bd45b9c0a261c62d5a9
-      internalID: -1070730705
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Throw_5
-      rect:
-        serializedVersion: 2
-        x: 1599
-        y: 867
-        width: 210
-        height: 330
-      alignment: 9
-      pivot: {x: 0.7160336, y: 0.7749508}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0f0eb2b055a5d42459028c948f08dfef
-      internalID: -582215076
+      spriteID: 10b633aada55c194d8435f49e18cc1fb
+      internalID: 1955658711
       vertices: []
       indices: 
       edges: []
@@ -246,12 +233,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Throw_0: 227231055
-      Throw_1: -894236674
-      Throw_2: 590729512
-      Throw_3: 555839064
-      Throw_4: -1070730705
-      Throw_5: -582215076
+      Phetonisio_0: -1812015838
+      Phetonisio_1: 28973387
+      Phetonisio_2: -1985766340
+      Phetonisio_3: 2081557884
+      Phetonisio_4: 81217871
+      Phetonisio_5: 1955658711
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
